@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Lista de Filmes</title>
+    <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+    <div id="container">
+        <main>
+            <nav>
+
+            </nav>
+            <div>
+                <h1>Meus Filmes Favoritos!</h1>
+            </div>
+            <section>
+                <form onsubmit="submitForm(e)">
+                    <div class="form-grupo">
+                        <div class="form-dados">
+                            <label>Nome do Filme:</label>
+                            <input type="text" id="txt-nome">
+                        </div>
+                        <div class="form-dados">
+                            <label>Imagem do Filme:</label>
+                            <input type="text" id="txt-imagem">
+                        </div>
+                    </div>
+                    <div class="form-grupo">
+                        <div class="form-dados">
+                            <label>Gênero do Filme:</label>
+                            <input type="text" id="txt-genero">
+                        </div>
+                        <div class="form-dados">
+                            <label>Nota do Filme:</label>
+                            <input type="text" id="txt-nota">
+                        </div>
+                    </div>
+                </form>
+                <div class="botao-salvar">
+                    <button type="submit">Salvar</button>
+                </div>
+            </section>
+
+            <section>
+                <div id="lista">
+                    
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>Desenvolvido por Rafael Fragozo Kaminski - BlueEditech @2021</p>
+        </footer>
+    </div>
+
+    <script src="static/index.js"></script>
+</body>
+</html>
