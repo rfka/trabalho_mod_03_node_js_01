@@ -61,10 +61,12 @@ footer{
 }
 
 #lista{
+    margin-top: 20px;
     display: flex;
     justify-content: space-evenly;
     text-align: center;
     padding: 20px 10px;
+    border-top: 2px solid #ccc;
 }
 
 .card{
@@ -81,4 +83,28 @@ footer{
     width: 200px;
     height: 300px;
 
+}
+
+.card-title{
+    box-shadow: 2px 2px 2px 2px rgb(220 220 220 / 75%);
+    margin: 5px;
+}
+
+.card-titles{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+button{
+    padding: 5px;
+    background-color:rgb(97, 174, 247);
+    color: #fff;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+input{
+    border-radius: 15px;
+    padding: 5px;
 }
