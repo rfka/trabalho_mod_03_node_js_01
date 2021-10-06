@@ -12,7 +12,7 @@ const Movies = [
     nota: 10,
     urlImagem:
       'https://upload.wikimedia.org/wikipedia/pt/f/f1/Minions_2-_The_Rise_of_Gru_poster.jpeg',
-    id: Date.now(),
+    id: 1,
   },
   {
     nome: 'Minions 2',
@@ -20,7 +20,7 @@ const Movies = [
     nota: 10,
     urlImagem:
       'https://upload.wikimedia.org/wikipedia/pt/f/f1/Minions_2-_The_Rise_of_Gru_poster.jpeg',
-    id: Date.now(),
+    id: 2,
   },
   {
     nome: 'Minions 3',
@@ -28,7 +28,7 @@ const Movies = [
     nota: 10,
     urlImagem:
       'https://upload.wikimedia.org/wikipedia/pt/f/f1/Minions_2-_The_Rise_of_Gru_poster.jpeg',
-    id: Date.now(),
+    id: 3,
   },
   {
     nome: 'Minions 4',
@@ -36,7 +36,7 @@ const Movies = [
     nota: 10,
     urlImagem:
       'https://upload.wikimedia.org/wikipedia/pt/f/f1/Minions_2-_The_Rise_of_Gru_poster.jpeg',
-    id: Date.now(),
+    id: 4,
   },
 ];
 
@@ -91,13 +91,7 @@ router.put('/:id', (req, res) => {
   movieExistente.nome = novoMovie.nome;
   movieExistente.genero = novoMovie.genero;
   movieExistente.nota = novoMovie.nota;
-  movieExistente.urlImagem = novoMovie.urlImagem;
-
-  if (!Object.keys(novoMovie).length) {
-    console.log(400);
-    res.status(400).send('Má Solicitação, rsrsrs!!!');
-    return;
-  }
+  movieExistente.imagem = novoMovie.imagem;
 
   if (
     !novoMovie || !novoMovie.nome || !novoMovie.genero || !novoMovie.nota || !novoMovie.urlImagem) {
@@ -111,7 +105,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
-  const movieIndex = movies.findIndex((movie) => movie.id === id);
+  const movieIndex = getMovieIndexById(id);
 
   if (movieIndex < 0) {
     res.status(404).send('Desculpe, não localizei nenhum filme!!');

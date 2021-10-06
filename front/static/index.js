@@ -60,16 +60,15 @@ const submitForm = async (envio) => {
         nota: nota.value,
     }
 
-    if(!editavel) {
-        const request = new Request(`${urlBD}/add` , {
+    if(!editando) {
+        const request = new Request(`${urlBD}/add`, {
             method: 'POST',
             body: JSON.stringify(movie),
             headers: new Headers({ 'Content-Type': 'application/json'})
         })
 
         const response = await fetch(request);
-        const resultado = await response.json();
-        
+        const resultado = await response.json();        
 
         if(resultado) {
             getMovies();
@@ -84,11 +83,12 @@ const submitForm = async (envio) => {
 
         const response = await fetch(request);
         const resultado = await response.json();
+        console.log(resultado);
+
 
         if(resultado) {
             getMovies();
         }
-
     }
 
     nome.value = '';
@@ -102,37 +102,41 @@ const submitForm = async (envio) => {
 const getMoviesById = async (id) => {
     const response = await fetch(`${urlBD}/${id}`);
     return movie = response.json();
+    
 };
 
 const putMovie = async (id) => {
-    editando = false;
+
+    editando = true;
     idEditando = id;
 
-    const movie = await getMovieById(id);
+    const movie = await getMoviesById(id);
 
-    let nomeNovo = document.getElementById(nome);
-    let imagemNovo = document.getElementById(imagem);
-    let generoNovo = document.getElementById(genero);
-    let notaNovo = document.getElementById(nota);
+    let nomeNovo1 = document.getElementById('nome');
+    let imagemNovo1 = document.getElementById('imagem');
+    let generoNovo1 = document.getElementById('genero');
+    let notaNovo1 = document.getElementById('nota');
 
-    nomeNovo.value = movie.nome;
-    imagemNovo.value = movie.imagem;
-    generoNovo.value = movie.genero;
-    notaNovo.value = movie.nota;
+    nomeNovo1.value = movie.nome;
+    imagemNovo1.value = movie.imagem;
+    generoNovo1.value = movie.genero;
+    notaNovo1.value = movie.nota;
 
 };
 
 const delMovie = async (id) => {
     const request = new Request(`${urlBD}/${id}` , {
         method: 'DELETE',
-    });
+    })
 
     const response = await fetch(request);
     const data = await response.json();
+    console.log(data);
+
 
     console.log(data.message);
 
     lista.innerHTML = '';
     getMovies();
 
-}
+};

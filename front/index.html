@@ -17,31 +17,31 @@
                 <h1>Meus Filmes Favoritos!</h1>
             </div>
             <section>
-                <form onsubmit="submitForm(envio)">
+                <form onsubmit="submitForm(envio)" id="form">
                     <div class="form-grupo">
                         <div class="form-dados">
-                            <label>Nome do Filme:</label>
-                            <input type="text" id="nome">
+                            <label for="nome">Nome do Filme:</label>
+                            <input type="text" id="nome" >
                         </div>
                         <div class="form-dados">
-                            <label>Imagem do Filme:</label>
+                            <label for="imagem">Imagem do Filme:</label>
                             <input type="text" id="imagem">
                         </div>
                     </div>
                     <div class="form-grupo">
                         <div class="form-dados">
-                            <label>Gênero do Filme:</label>
+                            <label for="genero">Gênero do Filme:</label>
                             <input type="text" id="genero">
                         </div>
                         <div class="form-dados">
-                            <label>Nota do Filme:</label>
+                            <label for="nota">Nota do Filme:</label>
                             <input type="text" id="nota">
                         </div>
                     </div>
+                    <div class="botao-salvar">
+                        <button type="submit">Salvar</button>
+                    </div>
                 </form>
-                <div class="botao-salvar">
-                    <button type="submit">Salvar</button>
-                </div>
             </section>
 
             <section>
