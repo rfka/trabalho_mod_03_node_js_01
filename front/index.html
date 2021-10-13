@@ -10,14 +10,11 @@
 <body>
     <div id="container">
         <main>
-            <nav>
-
-            </nav>
             <div>
                 <h1>Meus Filmes Favoritos!</h1>
             </div>
             <section>
-                <form onsubmit="submitForm(envio)" id="form">
+                <form onsubmit="submitForm(event)" id="form">
                     <div class="form-grupo">
                         <div class="form-dados">
                             <label for="nome">Nome do Filme:</label>
@@ -38,7 +35,7 @@
                             <input type="text" id="nota">
                         </div>
                     </div>
-                    <div class="botao-salvar">
+                    <div>
                         <button type="submit">Salvar</button>
                     </div>
                 </form>

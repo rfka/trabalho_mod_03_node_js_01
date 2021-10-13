@@ -17,7 +17,7 @@ const getMovies = async () => {
         <img src="${movie.urlImagem}" class="card-img-top" alt="${movie.nome}">
         <div class="card-titles">
             <div class="card-body">
-                <span class="card-title" style="font-size:30px">${movie.nome}</span>
+                <span class="card-title">${movie.nome}</span>
             </div>
             <div class="card-body1">
                 <div>
@@ -42,11 +42,10 @@ const getMovies = async () => {
     })
 
 }
-
 getMovies();
 
-const submitForm = async (envio) => {
-    envio.preventDefault(); 
+const submitForm = async (evento) => {
+    evento.preventDefault(); 
 
     let nome = document.getElementById('nome');
     let imagem = document.getElementById('imagem');
@@ -55,7 +54,7 @@ const submitForm = async (envio) => {
 
     const movie = {
         nome: nome.value,
-        imagem: imagem.value,
+        urlImagem: imagem.value,
         genero: genero.value,
         nota: nota.value,
     }
@@ -64,7 +63,7 @@ const submitForm = async (envio) => {
         const request = new Request(`${urlBD}/add`, {
             method: 'POST',
             body: JSON.stringify(movie),
-            headers: new Headers({ 'Content-Type': 'application/json'})
+            headers: new Headers({'Content-Type': 'application/json'})
         })
 
         const response = await fetch(request);
@@ -75,42 +74,39 @@ const submitForm = async (envio) => {
         }
 
     } else {
-        const request = new Request(`${urlBD}/${idEditando}` , {
+        const request = new Request(`${urlBD}/${idEditando}`, {
             method: 'PUT',
             body: JSON.stringify(movie),
-            headers: new Headers({ 'Content-Type': 'application/json'})
+            headers: new Headers({'Content-Type': 'application/json'})
         })
 
         const response = await fetch(request);
         const resultado = await response.json();
-        console.log(resultado);
-
 
         if(resultado) {
+            editando = false;
             getMovies();
         }
     }
 
-    nome.value = '';
-    imagem.value = '';
-    genero.value = '';
-    nota.value = '';
+    nome.value = ' ';
+    imagem.value = ' ';
+    genero.value = ' ';
+    nota.value = ' ';
 
     lista.innerHTML = '';
-};
+}
 
-const getMoviesById = async (id) => {
+const getMovieById = async (id) => {
     const response = await fetch(`${urlBD}/${id}`);
     return movie = response.json();
-    
-};
+}
 
 const putMovie = async (id) => {
-
     editando = true;
     idEditando = id;
 
-    const movie = await getMoviesById(id);
+    const movie = await getMovieById(id);
 
     let nomeNovo1 = document.getElementById('nome');
     let imagemNovo1 = document.getElementById('imagem');
@@ -122,7 +118,7 @@ const putMovie = async (id) => {
     generoNovo1.value = movie.genero;
     notaNovo1.value = movie.nota;
 
-};
+}
 
 const delMovie = async (id) => {
     const request = new Request(`${urlBD}/${id}` , {
@@ -131,8 +127,6 @@ const delMovie = async (id) => {
 
     const response = await fetch(request);
     const data = await response.json();
-    console.log(data);
-
 
     console.log(data.message);
 

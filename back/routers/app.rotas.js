@@ -15,27 +15,27 @@ const Movies = [
     id: 1,
   },
   {
-    nome: 'Minions 2',
+    nome: 'Uma Aventura Lego',
     genero: 'Animação',
     nota: 10,
     urlImagem:
-      'https://upload.wikimedia.org/wikipedia/pt/f/f1/Minions_2-_The_Rise_of_Gru_poster.jpeg',
+      'https://upload.wikimedia.org/wikipedia/pt/4/40/The_Lego_Movie.jpg',
     id: 2,
   },
   {
-    nome: 'Minions 3',
-    genero: 'Animação',
+    nome: 'Meu Primeiro Amor',
+    genero: 'Drama',
     nota: 10,
     urlImagem:
-      'https://upload.wikimedia.org/wikipedia/pt/f/f1/Minions_2-_The_Rise_of_Gru_poster.jpeg',
+      'https://upload.wikimedia.org/wikipedia/pt/2/2a/My_Girl_%28filme%29.jpg',
     id: 3,
   },
   {
-    nome: 'Minions 4',
-    genero: 'Animação',
+    nome: 'Bastardos Inglórios',
+    genero: 'Ação/Drama',
     nota: 10,
     urlImagem:
-      'https://upload.wikimedia.org/wikipedia/pt/f/f1/Minions_2-_The_Rise_of_Gru_poster.jpeg',
+      'https://upload.wikimedia.org/wikipedia/pt/c/c2/Inglourious_basterds_ver9.jpg',
     id: 4,
   },
 ];
@@ -71,50 +71,31 @@ router.get('/:id', (req, res) => {
 router.post('/add', (req, res) => {
   const movie = req.body;
   movie.id = Date.now();
-
-  if (
-    !movie || !movie.nome || !movie.genero || !movie.nota || !movie.urlImagem) {
-    console.log(400);
-    res.status(400).send('Má Solicitação, rsrsrs!!!');
-  } else {
-    Movies.push(movie);
-  }
-  console.log(201);
-  res.status(201).send(movie);
-});
+  Movies.push(movie);
+  res.status(201).send({message: 'Filme Cadastrado com Sucesso!',
+  data: movie});
+})
 
 router.put('/:id', (req, res) => {
-  const novoMovie = req.body;
+  const movieEdit = req.body;
   const id = req.params.id;
   let movieExistente = Movies.find((movie) => movie.id == id);
 
-  movieExistente.nome = novoMovie.nome;
-  movieExistente.genero = novoMovie.genero;
-  movieExistente.nota = novoMovie.nota;
-  movieExistente.imagem = novoMovie.imagem;
+  movieExistente.nome = movieEdit.nome;
+  movieExistente.genero = movieEdit.genero;
+  movieExistente.nota = movieEdit.nota;
+  movieExistente.urlImagem = movieEdit.urlImagem;
 
-  if (
-    !novoMovie || !novoMovie.nome || !novoMovie.genero || !novoMovie.nota || !novoMovie.urlImagem) {
-    console.log(400);
-    res.status(400).send('Má Solicitação, rsrsrs!!!');
-    return;
-  }
-
-  res.send(atualizado);
+  res.send({message:`Filme Atualizado com sucesso!!`});
 });
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
-  const movieIndex = getMovieIndexById(id);
-
-  if (movieIndex < 0) {
-    res.status(404).send('Desculpe, não localizei nenhum filme!!');
-    return;
-  }
+  const movieIndex = Movies.findIndex((movie) => movie.id == id);
 
   Movies.splice(movieIndex, 1);
 
-  res.send(excluido);
+  res.send({message: 'Filme excluido com sucesso!!'});
 });
 
 module.exports = router;

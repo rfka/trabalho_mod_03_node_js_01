@@ -32,6 +32,7 @@ form{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
 }
 
 .form-dados{
@@ -88,6 +89,7 @@ footer{
 .card-title{
     box-shadow: 2px 2px 2px 2px rgb(220 220 220 / 75%);
     margin: 5px;
+    font-size: 2rem;
 }
 
 .card-titles{
